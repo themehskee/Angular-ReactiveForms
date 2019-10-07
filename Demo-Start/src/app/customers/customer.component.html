@@ -232,7 +232,7 @@
       </div> -->
 
       <div class="form-group row mb-2">
-        <div class="offset-md-2 col-md-4">
+        <div class="offset-md-2 col-md-8">
           <button
             class="btn btn-primary mr-3"
             type="submit"
@@ -245,6 +245,21 @@
             [disabled]="!customerForm.valid"
           >
             Save
+          </button>
+          <button
+            class="btn btn-outline-secondary  mr-3"
+            type="button"
+            (click)="populateTestDataWithPatchValue()"
+          >
+            Test with patchValue
+          </button>
+
+          <button
+            class="btn btn-outline-secondary  mr-3"
+            type="button"
+            (click)="populateTestDataWithSetValue()"
+          >
+            Test with setValue
           </button>
         </div>
       </div>
