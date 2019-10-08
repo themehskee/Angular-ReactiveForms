@@ -18,7 +18,8 @@
             formControlName="firstName"
             [ngClass]="{
               'is-invalid':
-                (customerForm.get('firstName').touched || customerForm.get('firstName').dirty) &&
+                (customerForm.get('firstName').touched ||
+                  customerForm.get('firstName').dirty) &&
                 !customerForm.get('firstName').valid
             }"
           />
@@ -46,7 +47,9 @@
             formControlName="lastName"
             [ngClass]="{
               'is-invalid':
-                (customerForm.get('lastName').touched || customerForm.get('lastName').dirty) && !customerForm.get('lastName').valid
+                (customerForm.get('lastName').touched ||
+                  customerForm.get('lastName').dirty) &&
+                !customerForm.get('lastName').valid
             }"
           />
           <span class="invalid-feedback">
@@ -71,7 +74,9 @@
             formControlName="email"
             [ngClass]="{
               'is-invalid':
-                (customerForm.get('email').touched || customerForm.get('email').dirty) && !customerForm.get('email').valid
+                (customerForm.get('email').touched ||
+                  customerForm.get('email').dirty) &&
+                !customerForm.get('email').valid
             }"
           />
           <span class="invalid-feedback">
@@ -82,6 +87,51 @@
               Please enter a valid email address.
             </span>
           </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="phoneId">Phone</label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="phoneId"
+            type="tel"
+            placeholder="Phone"
+            formControlName="phone"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('phone').valid
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="customerForm.get('phone').errors?.required">
+              Please enter your phone number.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label pt-0">Send Notifications</label>
+        <div class="col-md-8">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="email"
+                formControlName="notification"
+              />Email
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="text"
+                formControlName="notification"
+              />Text
+            </label>
+          </div>
         </div>
       </div>
 
