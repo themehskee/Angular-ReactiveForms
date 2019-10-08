@@ -21,6 +21,7 @@ export class CustomerComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: '',
       notification: 'email',
+      rating: null,
       sendCatalog: true
     });
   }
@@ -50,7 +51,7 @@ export class CustomerComponent implements OnInit {
   setNotification(notifyVia: string): void {
     const phoneControl = this.customerForm.get('phone');
 
-    if(notifyVia === 'text') {
+    if (notifyVia === 'text') {
       phoneControl.setValidators(Validators.required);
     } else {
       phoneControl.clearValidators();
