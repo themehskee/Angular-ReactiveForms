@@ -89,6 +89,37 @@
           </span>
         </div>
       </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="confirmEmailId"
+          >Confirm Email</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="confirmEmailId"
+            type="email"
+            placeholder="Confirm Email (required)"
+            formControlName="confirmEmail"
+            [ngClass]="{
+              'is-invalid':
+                customerForm.get('emailGroup').errors ||
+                ((customerForm.get('confirmEmail').touched ||
+                  customerForm.get('confirmEmail').dirty) &&
+                  !customerForm.get('confirmEmail').valid)
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="customerForm.get('.confirmEmail').errors?.required">
+              Please confirm your email address.
+            </span>
+            <span *ngIf="customerForm.get('confirmEmail').errors?.match">
+              The confirmation does not match the email address.
+            </span>
+          </span>
+        </div>
+      </div>
+
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="phoneId">Phone</label>
         <div class="col-md-8">
