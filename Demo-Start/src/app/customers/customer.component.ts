@@ -1,3 +1,4 @@
+import { debounceTime } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
@@ -49,21 +50,24 @@ export class CustomerComponent implements OnInit {
       emailGroup: this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         confirmEmail: ['', Validators.required],
-      }, { validator: emailMatcher}),
+      }, { validator: emailMatcher }),
       phone: '',
       notification: 'email',
       rating: [null, ratingRange(1, 5)],
       sendCatalog: true
     });
 
-    this.customerForm.get('notification').valueChanges.subscribe( value => {
-        this.setNotification(value);
+    this.customerForm.get('notification').valueChanges.subscribe(value => {
+      this.setNotification(value);
     });
 
     const emailControl = this.customerForm.get('emailGroup.email');
-    emailControl.valueChanges.subscribe(
-      value => this.setMessage(emailControl)
-    )
+    emailControl.valueChanges
+      .pipe(
+        debounceTime(1000)
+      ).subscribe(
+        value => this.setMessage(emailControl)
+      );
   }
 
   save() {
@@ -104,7 +108,7 @@ export class CustomerComponent implements OnInit {
 
   setMessage(c: AbstractControl) {
     this.emailMessage = '';
-    if((c.touched || c.dirty) && c.errors) {
+    if ((c.touched || c.dirty) && c.errors) {
       this.emailMessage = Object.keys(c.errors).map(
         key => this.validationMessages[key]).join(' ');
     }
